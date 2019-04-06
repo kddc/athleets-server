@@ -1,6 +1,6 @@
 package gg.athleets.http
 
-import akka.http.scaladsl.server.{Directive1, MalformedQueryParamRejection, Route}
+import akka.http.scaladsl.server.{ Directive1, MalformedQueryParamRejection, Route }
 import akka.http.scaladsl.server.Directives._
 import gg.athleets.providers.AuthProvider
 import gg.athleets.repositories.UserRepository.User

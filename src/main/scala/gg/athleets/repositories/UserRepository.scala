@@ -6,13 +6,13 @@ import akka.Done
 import akka.stream.scaladsl.Source
 import gg.athleets.utils.BaseBSONProtocol
 import reactivemongo.api.collections.bson.BSONCollection
-import reactivemongo.bson.{BSONDocument, BSONDocumentHandler, Macros}
+import reactivemongo.bson.{ BSONDocument, BSONDocumentHandler, Macros }
 import reactivemongo.akkastream._
 
-import scala.concurrent.{Await, Future}
+import scala.concurrent.{ Await, Future }
 import akka.stream.ActorMaterializer
 import reactivemongo.api.DefaultDB
-import reactivemongo.api.indexes.{Index, IndexType}
+import reactivemongo.api.indexes.{ Index, IndexType }
 
 import scala.concurrent.ExecutionContext
 import scala.concurrent.duration._

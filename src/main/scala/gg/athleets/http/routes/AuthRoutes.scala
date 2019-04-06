@@ -1,30 +1,28 @@
 package gg.athleets.http.routes
 
 import akka.http.scaladsl.model.headers.HttpChallenge
-import akka.http.scaladsl.server.{AuthenticationFailedRejection}
-import akka.http.scaladsl.server.AuthenticationFailedRejection.{CredentialsRejected}
+import akka.http.scaladsl.server.{ AuthenticationFailedRejection }
+import akka.http.scaladsl.server.AuthenticationFailedRejection.{ CredentialsRejected }
 import akka.http.scaladsl.server.Directives._
 import com.typesafe.scalalogging.LazyLogging
-import gg.athleets.http.{HttpProtocol, HttpRoutes}
+import gg.athleets.http.{ HttpProtocol, HttpRoutes }
 import gg.athleets.providers.AuthProvider
 import gg.athleets.repositories.UserRepository.User
 import gg.athleets.utils.JsonWebToken
 import play.api.libs.json.Json
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.{ ExecutionContext, Future }
 import scala.concurrent.duration._
 
 final case class AuthTokenResponse(
   access_token: String,
   refresh_token: String,
   token_type: String,
-  expires_in: Long
-)
+  expires_in: Long)
 
 final case class AuthFailure(
   error: String,
-  description: String
-)
+  description: String)
 
 class AuthRoutes(implicit ec: ExecutionContext, authProvider: AuthProvider) extends HttpRoutes
   with HttpProtocol
@@ -55,7 +53,7 @@ class AuthRoutes(implicit ec: ExecutionContext, authProvider: AuthProvider) exte
     }
   }
 
-  private def passwordGrant(username: String, password: String): Future[Either[AuthenticationFailedRejection, AuthTokenResponse]]  = {
+  private def passwordGrant(username: String, password: String): Future[Either[AuthenticationFailedRejection, AuthTokenResponse]] = {
     authProvider.verifyUserCredentials(username, password).map {
       case Right(user) => Right(createAuthTokenResponse(user))
       case Left(failure) => Left(createRejection(failure))

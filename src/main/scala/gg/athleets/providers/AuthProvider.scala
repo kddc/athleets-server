@@ -2,10 +2,10 @@ package gg.athleets.providers
 
 import java.util.UUID
 
-import akka.http.scaladsl.model.headers.{HttpChallenge, OAuth2BearerToken}
-import akka.http.scaladsl.server.AuthenticationFailedRejection.{CredentialsMissing, CredentialsRejected}
+import akka.http.scaladsl.model.headers.{ HttpChallenge, OAuth2BearerToken }
+import akka.http.scaladsl.server.AuthenticationFailedRejection.{ CredentialsMissing, CredentialsRejected }
 import akka.http.scaladsl.server.Directives._
-import akka.http.scaladsl.server.{AuthenticationFailedRejection, Directive1}
+import akka.http.scaladsl.server.{ AuthenticationFailedRejection, Directive1 }
 import com.github.t3hnar.bcrypt._
 import gg.athleets.http.routes.AuthFailure
 import gg.athleets.repositories.UserRepository
@@ -14,17 +14,15 @@ import gg.athleets.utils.JsonWebToken
 import play.api.libs.json.Json
 import com.typesafe.config.Config
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.{ ExecutionContext, Future }
 import scala.util.Success
-
 
 class AuthProvider(userRepository: UserRepository)(implicit ex: ExecutionContext, config: Config) {
   type AuthResult[P] = Either[AuthFailure, P]
   val InvalidCredentials = AuthFailure("invalid_credentials", "Invalid Credentials")
   val InvalidToken = AuthFailure("invalid_token", "Could not find user provided in the token")
 
-//  def extractPrincipal
-
+  //  def extractPrincipal
 
   def extractToken: Directive1[Option[String]] = {
     extractCredentials.flatMap {

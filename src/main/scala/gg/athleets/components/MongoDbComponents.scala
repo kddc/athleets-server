@@ -1,6 +1,6 @@
 package gg.athleets.components
 
-import reactivemongo.api.{DefaultDB, MongoConnection, MongoDriver}
+import reactivemongo.api.{ DefaultDB, MongoConnection, MongoDriver }
 
 import scala.concurrent.Await
 import scala.concurrent.duration._

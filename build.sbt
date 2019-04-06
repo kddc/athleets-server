@@ -3,9 +3,9 @@ lazy val akkaVersion          = "2.5.19"
 lazy val reactiveMongoVersion = "0.13.0"
 lazy val sttpVersion          = "1.5.7"
 
+name         := "athleets"
 organization := "gg.athleets"
 scalaVersion := "2.12.7"
-name         := "athleets"
 
 libraryDependencies ++= Seq(
   // http client
@@ -35,4 +35,13 @@ libraryDependencies ++= Seq(
   "com.pauldijou"               %% "jwt-play-json"            % "1.1.0"
 )
 
-scalacOptions += ""
+enablePlugins(JavaAppPackaging)
+enablePlugins(DockerPlugin)
+
+packageName       in Docker := "athleets-server"
+version           in Docker := "latest"
+dockerRepository  in Docker := Some("kddc/athleets")
+
+mainClass in Compile := Some("gg.athleets.Application")
+
+dockerBaseImage := "openjdk:jre"
