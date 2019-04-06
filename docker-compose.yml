@@ -1,0 +1,30 @@
+version: "3.1"
+
+services:
+  gateway:
+    image: "nginx:1.15.8-alpine"
+    ports:
+      - "80:80"
+    volumes:
+      - "./nginx.conf:/etc/nginx/conf.d/default.conf:ro"
+    depends_on:
+      - "server"
+  server:
+    image: "kddc/athleets-server:latest"
+    ports:
+      - "8080:8080"
+    environment:
+      - "MONGODB_DATABASE_NAME=athleets"
+  mongodb:
+    image: "mongo:3.6"
+    ports:
+      - "27017:27017"
+    volumes:
+      - "mongodb:/data/db"
+    restart: "unless-stopped"
+#      - "MONGO_INITDB_ROOT_USERNAME=root"
+#      - "MONGO_INITDB_ROOT_PASSWORD=root"
+
+volumes:
+  mongodb:
+    driver: "local"

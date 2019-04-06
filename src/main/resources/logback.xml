@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%yellow(%date) %highlight(%-5level) %cyan(%logger) - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <logger name="akka.http.impl.engine.client" level="INFO"/>
+    <logger name="akka.io.TcpListener" level="INFO"/>
+    <!--<logger name="reactivemongo.api" level="INFO"/>-->
+    <!--<logger name="reactivemongo.core" level="INFO"/>-->
+</configuration>
