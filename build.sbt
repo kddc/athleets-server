@@ -38,9 +38,10 @@ libraryDependencies ++= Seq(
 enablePlugins(JavaAppPackaging)
 enablePlugins(DockerPlugin)
 
-packageName       in Docker := "athleets-server"
-version           in Docker := "latest"
-dockerRepository  in Docker := Some("kddc/athleets")
+packageName       in Docker := "athleets"
+version           in Docker := "server-latest"
+
+dockerRepository := Some("kddc")
 
 mainClass in Compile := Some("gg.athleets.Application")
 
