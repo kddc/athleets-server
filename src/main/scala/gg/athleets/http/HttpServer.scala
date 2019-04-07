@@ -11,8 +11,10 @@ class HttpServer(
   userRoutes: UserRoutes,
 )(implicit executionContext: ExecutionContext, materializer: ActorMaterializer) {
 
-  def routes = concat(
-    authRoutes.routes,
-    userRoutes.routes,
-  )
+  def routes = pathPrefix("api") {
+    concat(
+      authRoutes.routes,
+      userRoutes.routes,
+    )
+  }
 }
